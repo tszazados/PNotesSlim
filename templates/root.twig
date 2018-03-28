@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {#################}
+    {# ROOT TEMPLATE #}
+    {#################}
+
+    {# DEAULT HEAD BLOCK #}
+    {#% spaceless %#}
+    {% block defaultHeadBlock %}
+    <meta charset="utf-8"/>
+    <!-- [if IE]>
+    <meta http-equiv="imagetoolbar" content="no"/>
+    <meta name="MSSmartTagsPreventParsing" content="true"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+    <meta name="author" content="kohr-ah2/tib/slim">
+    <script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>
+
+
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script src="./../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    {#FETCHING CSS AND JS FILES#}
+
+    {% for item in cssArray %}
+    <link href="{{ item }}" rel="stylesheet" type="text/css"/>
+    {% endfor %}
+    {% for item in jsArray %}
+    <script src="{{ item }}" defer></script>
+    {% endfor %}
+    {{ EXTRA_SCRIPT_PLACEHOLDER|raw }}
+
+    {% endblock %}
+
+    {#PAGE TITLE BLOCK#}
+
+    {% block pageTitleBlock %}
+    <title>{% block title %}{% endblock %} - My Webpage</title>
+    {% endblock %}
+
+</head>
+<body id=body>
+
+
+    {# HEADER #}
+
+    <div id="__header">
+        {% block header %}
+        <section>
+            <h1><!--Private Notes-->Test</h1>
+        </section>
+        {% endblock %}
+    </div>
+
+    {# CONTENT #}
+
+    <div id="content">
+        {% include 'white_line.twig' %}
+        {% block content %}{% endblock %}
+    </div>
+
+    {# FOOTER #}
+
+    <div id="__footer">
+        {% block footer %}
+        &copy; 1982 - {{ "now"|date("Y") }} Sinclair Research Ltd.
+        {% endblock %}
+    </div>
+
+</body>
+</html>

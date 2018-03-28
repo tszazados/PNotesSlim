@@ -1,0 +1,20 @@
+{
+  "name": "pnotesslim",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.php",
+  "scripts": {
+    "test": "alert('tressst');"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "currentscript": "^1.1.1",
+    "express": "^4.16.3",
+    "gem": "^2.4.3",
+    "grunt": "^1.0.2",
+    "gulp": "^3.9.1",
+    "lodash": "^4.17.5",
+    "requirejs": "^2.3.5"
+  }
+}
