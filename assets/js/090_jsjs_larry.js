@@ -2092,35 +2092,76 @@ function getInlineParams(script_name) {
     return {};
 }
 
-function istaxi(x) {
-    var countyCodes = ["02", "22", "03", "23", "04", "24", "05", "25", "06", "26", "07", "27", "08", "28", "09", "29", "10", "30", "11", "31", "12", "32", "13", "33", "14", "34", "15", "35", "16", "36", "17", "37", "18", "38", "19", "39", "20", "40", "41", "42", "43", "44", "51"],
-        re1 = /-/g, sum = 0, zz, chkSum=0;
-    //ha nem string és nem 13 hosszú(kötőjelekkel)
-    if (typeof x !== 'string' || x.length!==13)
-    {
-        return false;
-    }
-    //köztes kötőjel eltávolítása
-    x = x.replace(re1, '');
-    sum += parseInt(x[0]) * 9;
-    sum += parseInt(x[1]) * 7;
-    sum += parseInt(x[2]) * 3;
-    sum += parseInt(x[3]) * 1;
-    sum += parseInt(x[4]) * 9;
-    sum += parseInt(x[5]) * 7;
-    sum += parseInt(x[6]) * 3;
-    chkSum = 10 - (sum % 10);
-    if (chkSum == 10) {
-        chkSum = 0;
-    }
-    if (chkSum != parseInt(x[7])) //torzsszam
-        return false;
-    if (parseInt(x[8]) > 5 || parseInt(x[8]) < 1) //afa kod
-        return false;
-    zz = x.substring(9, 11); //megye kod
-    if (countyCodes.indexOf(zz) == -1)
-        return false;
-    return true;
+function istaxi ( x )
+{
+  var countyCodes                        = [ "02" , "22" , "03" , "23" , "04" , "24" , "05" , "25" , "06" , "26" , "07" , "27" , "08" , "28" , "09" , "29" , "10" , "30" , "11" , "31" , "12" , "32" , "13" , "33" , "14" , "34" , "15" , "35" , "16" , "36" , "17" , "37" , "18" , "38" , "19" , "39" , "20" , "40" , "41" , "42" , "43" , "44" , "51" ] ,
+      re1 = /-/g , sum = 0 , zz , chkSum = 0;
+  //ha nem string és nem 13 hosszú(kötőjelekkel)
+  if ( typeof x !== 'string' || x.length !== 13 )
+  {
+    return false;
+  }
+  //köztes kötőjel eltávolítása
+  x = x.replace ( re1 , '' );
+  sum += parseInt ( x[ 0 ] ) * 9;
+  sum += parseInt ( x[ 1 ] ) * 7;
+  sum += parseInt ( x[ 2 ] ) * 3;
+  sum += parseInt ( x[ 3 ] ) * 1;
+  sum += parseInt ( x[ 4 ] ) * 9;
+  sum += parseInt ( x[ 5 ] ) * 7;
+  sum += parseInt ( x[ 6 ] ) * 3;
+  chkSum = 10 - (sum % 10);
+  if ( chkSum == 10 )
+  {
+    chkSum = 0;
+  }
+  if ( chkSum != parseInt ( x[ 7 ] ) ) //torzsszam
+  {
+    return false;
+  }
+  if ( parseInt ( x[ 8 ] ) > 5 || parseInt ( x[ 8 ] ) < 1 ) //afa kod
+  {
+    return false;
+  }
+  zz = x.substring ( 9 , 11 ); //megye kod
+  if ( countyCodes.indexOf ( zz ) == -1 )
+  {
+    return false;
+  }
+  return true;
 }
 
-
+function istaxi2 ( x )
+{
+  var countyCodes      = [ "02" , "22" , "03" , "23" , "04" , "24" , "05" , "25" , "06" , "26" , "07" , "27" , "08" , "28" , "09" , "29" , "10" , "30" , "11" , "31" , "12" , "32" , "13" , "33" , "14" , "34" , "15" , "35" , "16" , "36" , "17" , "37" , "18" , "38" , "19" , "39" , "20" , "40" , "41" , "42" , "43" , "44" , "51" ] ,
+      re1 = /-/g , sum = 0 , zz;
+  //ha nem string és nem 13 hosszú(kötőjelekkel)
+  if ( typeof x !== 'string' || x.length !== 13 )
+  {
+    return false;
+  }
+  //köztes kötőjel eltávolítása
+  x = x.replace ( re1 , '' );
+  sum += parseInt ( x[ 0 ] ) * 9;
+  sum += parseInt ( x[ 1 ] ) * 7;
+  sum += parseInt ( x[ 2 ] ) * 3;
+  sum += parseInt ( x[ 3 ] ) * 1;
+  sum += parseInt ( x[ 4 ] ) * 9;
+  sum += parseInt ( x[ 5 ] ) * 7;
+  sum += parseInt ( x[ 6 ] ) * 3;
+  sum = sum % 10;
+  if ( 10 - sum != parseInt ( x[ 7 ] ) ) //torzsszam
+  {
+    return false;
+  }
+  if ( parseInt ( x[ 8 ] ) > 5 || parseInt ( x[ 8 ] ) < 1 ) //afa kod
+  {
+    return false;
+  }
+  zz = x.substring ( 9 , 11 ); //megye kod
+  if ( countyCodes.indexOf ( zz ) == -1 )
+  {
+    return false;
+  }
+  return true;
+}

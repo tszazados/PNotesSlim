@@ -2378,6 +2378,95 @@ class Str
     return implode ( "" , $resultArray );
   }
   
+  /**
+   * Check hunagrian tax number's validity (CDV)
+   *
+   * @param $x
+   *
+   * @return bool
+   */
+  public static function isValidTaxNumber ( $x )
+  {
+    $countyCodes = [
+      "02" ,
+      "22" ,
+      "03" ,
+      "23" ,
+      "04" ,
+      "24" ,
+      "05" ,
+      "25" ,
+      "06" ,
+      "26" ,
+      "07" ,
+      "27" ,
+      "08" ,
+      "28" ,
+      "09" ,
+      "29" ,
+      "10" ,
+      "30" ,
+      "11" ,
+      "31" ,
+      "12" ,
+      "32" ,
+      "13" ,
+      "33" ,
+      "14" ,
+      "34" ,
+      "15" ,
+      "35" ,
+      "16" ,
+      "36" ,
+      "17" ,
+      "37" ,
+      "18" ,
+      "38" ,
+      "19" ,
+      "39" ,
+      "20" ,
+      "40" ,
+      "41" ,
+      "42" ,
+      "43" ,
+      "44" ,
+      "51",
+    ];
+    
+    $x = str_replace ( "-" , "" , $x );
+    $sum = 0;
+    if ( mb_strlen ( $x ) !== 13 )
+    {
+      return FALSE;
+    }
+    
+    $sum += substr ( $x , 0 , 1 ) * 9;
+    $sum += substr ( $x , 1 , 1 ) * 7;
+    $sum += substr ( $x , 2 , 1 ) * 3;
+    $sum += substr ( $x , 3 , 1 ) * 1;
+    $sum += substr ( $x , 4 , 1 ) * 9;
+    $sum += substr ( $x , 5 , 1 ) * 7;
+    $sum += substr ( $x , 6 , 1 ) * 3;
+    
+    $chkSum = 10 - ( $sum % 10 );
+    if ( $chkSum == 10 )
+    {
+      $chkSum = 0;
+    }
+    if ( $chkSum != substr ( $x , 7 , 1 ) * 3 ) //torzsszam
+    {
+      return FALSE;
+    }
+    
+    
+    if ( substr ( $x , 8 , 1 ) > 5 || substr ( $x , 8 , 1 ) < 1 ) //afa kod
+    {
+      return FALSE;
+    }
+    $zz = substr ( $x , 9 , 2 );
+    return array_key_exists ( $zz , $countyCodes );
+  }
+  
   
 }
 
